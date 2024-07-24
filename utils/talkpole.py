@@ -19,7 +19,7 @@ class TalkPole:
             logger.info('TalkPole Initialization...')
             self.initialized = True
             self._logger = logger
-            self._model = krs.saving.load_model('./ai-models/CNN-BiLSTM-2.keras')
+            self._model = krs.models.load_model('../ai-models/CNN-BiLSTM-2.h5')
             self._model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
             self._logger.info('Talkpole Loaded Successfully.')
             with open('./ai-models/tokenizer.json', 'r', encoding='utf-8') as f:
