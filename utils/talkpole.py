@@ -1,29 +1,34 @@
 
 import keras as krs
+import logging
+from logging import Logger
 import json
 from keras._tf_keras.keras.preprocessing.text import tokenizer_from_json
 
 class TalkPole:
     _model=None;
     _tokenizer = None;
+    _logger = None;
     _instance=None;
-    def __new__(cls, *args, **kwargs):
+    def __new__(cls,logger:Logger):
         if not cls._instance:
-            print("TalkPole Creation...")
+            logger.info('Creating TalkPole Instance...')
             cls._instance = super(TalkPole, cls).__new__(cls)
         return cls._instance
-    def __init__(self):
+    def __init__(self,logger:Logger):
         if not hasattr(self,'initialized'):
-            print("TalkPole Building...")
+            logger.info('TalkPole Initialization...')
             self.initialized = True
+            self._logger = logger
             self._model = krs.models.load_model('./ai-models/cnn_model.h5')
-            print('Model Loaded Successfully.')
+            self._model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+            self._logger.info('Talkpole Loaded Successfully.')
             with open('./ai-models/tokenizer.json', 'r', encoding='utf-8') as f:
                 json_tok = json.load(f)
             self._tokenizer = tokenizer_from_json(json_tok)
-            print('Tokenizer Loaded Successfully')
+            self._logger.info('Tokenizer Loaded Successfully.')
     def __del__(self):
-        print("TalkPole Destruction...")
+        self._logger.info('TalkPole Deleted.')
         self.initialized = False
         self._model = None
         self._instance=None
