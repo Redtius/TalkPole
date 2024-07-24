@@ -1,6 +1,5 @@
 
 import keras as krs
-import logging
 from logging import Logger
 import json
 from keras._tf_keras.keras.preprocessing.text import tokenizer_from_json
@@ -20,7 +19,7 @@ class TalkPole:
             logger.info('TalkPole Initialization...')
             self.initialized = True
             self._logger = logger
-            self._model = krs.models.load_model('./ai-models/cnn_model.h5')
+            self._model = krs.saving.load_model('./ai-models/CNN-BiLSTM-2.keras')
             self._model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
             self._logger.info('Talkpole Loaded Successfully.')
             with open('./ai-models/tokenizer.json', 'r', encoding='utf-8') as f:

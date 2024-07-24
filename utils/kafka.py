@@ -2,7 +2,6 @@ from utils.talkpole import TalkPole
 import json
 import threading
 import os
-import logging
 from logging import Logger
 from kafka import KafkaConsumer
 from kafka import KafkaProducer
