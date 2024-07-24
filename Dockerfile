@@ -6,6 +6,8 @@ WORKDIR /app
 COPY requirements.txt requirements.txt
 RUN pip install --ignore-installed -r requirements.txt
 
-COPY . ./app
+COPY . .
 
-CMD [ "python3", "-m" , "main.py", "--host=0.0.0.0"]
+ENV FLASK_APP=main.py
+
+CMD [ "gunicorn", "-w","4","-b","0.0.0.0:5000" , "main:app"]

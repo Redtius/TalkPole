@@ -14,6 +14,12 @@ services:
       - talkpole
     depends_on:
       - kafka
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      retries: 3
+    
 
   kafka:
     container_name: kafka

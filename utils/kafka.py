@@ -6,8 +6,8 @@ import os
 from kafka import KafkaConsumer
 from kafka import KafkaProducer
 
-kafka_port = os.environ['KAFKA_PORT']
-kafka_host = os.environ['KAFKA_HOST']
+kafka_port = os.environ['KAFKA_PORT'] if 'KAFKA_PORT' in os.environ else '9094'
+kafka_host = os.environ['KAFKA_HOST'] if 'KAFKA_HOST' in os.environ else 'localhost'
 
 kafka_con = f'{kafka_host}:{kafka_port}'
 
