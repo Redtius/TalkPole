@@ -2,7 +2,7 @@
 import keras as krs
 from logging import Logger
 import json
-from keras._tf_keras.keras.preprocessing.text import tokenizer_from_json
+from tensorflow.keras.preprocessing.text import tokenizer_from_json
 
 class TalkPole:
     _model=None;

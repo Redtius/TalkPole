@@ -1,4 +1,4 @@
-version: '3'
+version: '3.4'
 services:
   talkpole:
     container_name: talkpole
