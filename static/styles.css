@@ -1,0 +1,145 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: beige;
+  margin: 0;
+  padding: 0;
+}
+
+.title-nav {
+  color: #323232;
+  font-weight: 900;
+  font-size: 30px;
+  margin-bottom: 25px;
+}
+
+
+.navbar {
+  background-color: lightblue;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  text-align: center;
+  padding: 1em;
+  height:64px;
+  border-bottom: 4px solid black;
+  box-shadow: 4px 0px black;
+}
+.main {
+  margin: 5em;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+label {
+  margin-bottom: 0.5em;
+}
+textarea {
+  margin-bottom: 1em;
+}
+button {
+  padding: 0.5em;
+  background-color: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width:50%;
+}
+button:hover {
+  background-color: #555;
+}
+a {
+  text-decoration: none;
+  color: white;
+  margin: 8px;
+  font-size: 1em;
+  padding:4px
+}
+.logo-img{
+  width: 196px;
+  height: 164px;
+}
+.links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align:center;
+  font-size:20px;
+  font-weight: 900;
+  height: 100%;
+  margin:0px 12px;
+  color: #323232;
+}
+.links > a {
+  text-align:center;
+  color: inherit;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+.links > a:hover {
+  color: #555;
+  text-decoration-line: underline;
+  box-shadow: inset 0 -1.5em 0 hsla(0, 0%, 100%, 0.6);
+}
+.polarity-bar{
+  height: 32px;
+  width:30%;
+  display:inline-block;
+  position:relative;
+  clear: both;
+  background: rgb(255,0,0);
+  background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,232,0,1) 50%, rgba(26,255,1,1) 100%);
+  border: 2px solid black;
+  border-radius: 5px;
+  box-shadow: 4px 4px black;
+}
+.polarity-line{
+  position:absolute;
+  height:100%;
+  width:2px;
+  background-color: black;
+  top: 0;
+  left: 50%;
+  z-index: 1;
+}
+.result{
+  display:flex;
+  justify-content:center;
+  align-content:center;
+  width:100%;
+  height:56px;
+}
+.logo{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100%;
+}
+.btn-container{
+  display:flex;
+  justify-content: end;
+}
+.options-send{
+  display: grid;
+  justify-items: space-between;
+  align-items:center;
+  align-content: center;
+  grid-template-columns: 1fr 1fr;
+}
+select {
+  width:50%;
+  background-color:#333;
+  color:white;
+  padding:8px;
+}
+.model-name{
+  position:absolute;
+  top:-60%;
+  left:-20px;
+  font-size:10px;
+}
