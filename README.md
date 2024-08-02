@@ -1,5 +1,4 @@
 # TalkPole
-## Overview
 
 <p align="center">
 <img src="./resources/TalkPole.png" alt="Project Logo" width="196" height="auto" />
@@ -8,6 +7,8 @@
 <p align="center" style="color:gray;">
   TalkPole Logo
 </p>
+
+## Overview
 
 TalkPole is an innovative sentiment analysis model designed to accurately predict the sentiment of French sentences. Leveraging a range of neural network architectures, TalkPole excels in discerning both positive and negative sentiments with high precision. Trained on a comprehensive French dataset, TalkPole is finely tuned to understand and interpret the nuances of the French language.
 
@@ -27,6 +28,10 @@ As a forward-thinking solution, TalkPole seamlessly integrates into microservice
 * LSTM
 * CNN-BiLSTM
 * DistilBERT
+
+<p align="center">
+<img src="" alt="Models Comparison" width="500" height="auto"   />
+</p>
 
 <p align="center" style="color:gray;">
   Models Comparison
@@ -55,6 +60,10 @@ This project wouldn't be possible without these tools:
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/keras/keras-original-wordmark.svg" width="80" height="auto" />
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tensorflow/tensorflow-original-wordmark.svg" width="80" height="auto"/>
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flask/flask-original-wordmark.svg" width="80" height="auto"/>
+</p>
+
+<p align="center" style="color:gray;">
+  Tools Used
 </p>
 
 ## Installation
@@ -138,9 +147,9 @@ pytest
 ## Troubleshooting
 
 * **Common Issues**
- * Kafka connection problems: Ensure Kafka is running and accessible.
- * Model loading issues: Verify model files are present and correctly referenced.
- * Versions incompatibility: Make sure all dependencies have the right versions and python is 3.12+.
+   * Kafka connection problems: Ensure Kafka is running and accessible.
+   * Model loading issues: Verify model files are present and correctly referenced.
+   * Versions incompatibility: Make sure all dependencies have the right versions and python is 3.12+.
 
 ## License
 
