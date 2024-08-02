@@ -1,9 +1,9 @@
-name: Deploy CNN Version
+name: Deploy UI version
 
 on:
   push:
     branches:
-      - Kafka-CNN
+      - main
 
 jobs:
   deploy-images:
@@ -24,5 +24,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/talkpole:kafka-cnn
+        tags: |
+          ${{ secrets.DOCKERHUB_USERNAME }}/talkpole:latest
+          ${{ secrets.DOCKERHUB_USERNAME }}/talkpole:ui-version
 

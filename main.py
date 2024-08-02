@@ -19,7 +19,7 @@ def index():
         return render_template('index.html',prediction_cnn=result_cnn[0][0],prediction_lstm=result_lstm[0][0],prediction_cbi=result_cbi[0][0])
     return render_template('index.html',prediction_cnn=None,prediction_lstm=None,prediction_cbi=None)
 
-@app.route('/docs',method = ['GET'] )
+@app.route('/docs',methods = ['GET'] )
 def docs():
     return render_template('docs.html')
 
