@@ -30,12 +30,15 @@
             <div class="polarity-bar">
                 <div class="polarity-line" style="left:{{prediction_cnn*100}}%;">
                     <div class="model-name">CNN</div>
+                    <div class="model-pred">{{prediction_cnn|round(2)}}</div>
                 </div>
                 <div class="polarity-line" style="left:{{prediction_lstm*100}}%;color:blue;background-color:blue;">
                     <div class="model-name">LSTM</div>
+                    <div class="model-pred">{{prediction_lstm|round(2)}}</div>
                 </div>
                 <div class="polarity-line" style="left:{{prediction_cbi*100}}%;color:purple;background-color:purple;">
                     <div class="model-name">CBI</div>
+                    <div class="model-pred">{{prediction_cbi|round(2)}}</div>
                 </div>
                     
             </div>
