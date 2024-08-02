@@ -3,6 +3,5 @@ Flask==3.0.3
 itsdangerous==2.2.0
 six == 1.16.0
 gunicorn == 22.0.0
-kafka-python == 2.0.2
-keras==2.15.0
+kafka-python-ng == 2.2.2
 Flask-RESTful == 0.3.10

@@ -21,9 +21,11 @@ class KafkaClient:
   def get_producer(self):
     return self.producer
 
+  @staticmethod
   def serializer(message):
       return json.dumps(message).encode('utf-8')
 
+  @staticmethod
   def deserializer(message):
       return json.loads(message.decode('utf-8'))
 
@@ -47,8 +49,16 @@ class KafkaClient:
           if msg:
             for messages in msg.items():
               for message in messages[1]:
-                pred = talkpole.predict(message.value['text'])
-                self.produce(producer,float(pred[0][0]))
+                pred = talkpole.predict(message.value['content'])
+                resp = {
+                  'content':message.value['content'],
+                  'requestId': message.value['requestId'],
+                  'ref':message.value['ref'],
+                  'senderId':message.value['senderId'],
+                  'chatTicket':message.value['chatTicket'],
+                  'result':float(pred[0][0])
+                }
+                self.produce(producer,resp)
       finally:
         consumer.close()
     consumer_thread = threading.Thread(target=consume)
@@ -56,6 +66,7 @@ class KafkaClient:
     self.logger.info('Consumer Thread Started...')
     return consumer,producer
 
+  @staticmethod
   def produce(producer: KafkaProducer,msg):
     producer.send('talkpole_out',value=msg,key=b'result')
   
