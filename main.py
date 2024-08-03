@@ -1,4 +1,4 @@
-from flask import Flask,jsonify,render_template,request
+from flask import Flask,jsonify,request
 from flask_restful import Api
 from utils.talkpole import TalkPole
 
@@ -13,15 +13,8 @@ def health():
 
 @app.route('/predict', methods=['GET'])
 def get_result():
-    model = request.args.get('model') if request.args.get('model') else 'cbi'
     data = request.get_json();
-    if model == 'lstm':
-        result_arr = talkpole.pred_lstm(data['content']);
-    elif model == 'cnn':
-        result_arr = talkpole.pred_cnn(data['content']);
-    else:
-        result_arr = talkpole.pred_cbi(data['content']);
-    
+    result_arr = talkpole.predict(data['content']);
     result = result_arr.tolist();
     return jsonify({'result':result[0]})
 

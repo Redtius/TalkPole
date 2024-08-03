@@ -1,9 +1,9 @@
-name: Deploy REST version
+name: Deploy REST lite version
 
 on:
   push:
     branches:
-      - REST
+      - REST-lite
 
 jobs:
   deploy-images:
@@ -25,4 +25,4 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: |
-          ${{ secrets.DOCKERHUB_USERNAME }}/talkpole:rest-api
+          ${{ secrets.DOCKERHUB_USERNAME }}/talkpole:rest-lite
