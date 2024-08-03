@@ -27,15 +27,43 @@ As a forward-thinking solution, TalkPole seamlessly integrates into microservice
 * CNN
 * LSTM
 * CNN-BiLSTM
-* DistilBERT
+* DistilBERT (still under development)
+
+Here is a comparative analysis of the models tested for classifying text as positive or negative. The CNN model demonstrated the best performance in accurately labeling the sentiment.
 
 <p align="center">
-<img src="" alt="Models Comparison" width="500" height="auto"   />
+<img src="./resources/model_comparison_1.PNG" alt="Models Comparison 1" width="750" height="auto"   />
 </p>
 
 <p align="center" style="color:gray;">
-  Models Comparison
+  Accuracy/Precision/Recall Comparison
 </p>
+
+However, when it comes to precision in determining the sentiment polarity, the CNN model fell short. In contrast, the CNN-BiLSTM model excelled in this aspect. The improved precision of the CNN-BiLSTM model is largely due to the context-sensitive capabilities of the BiLSTM layer, which enhances its ability to capture and interpret subtle nuances in sentiment more effectively.
+
+<p align="center">
+<img src="./resources/model_comparison_2.PNG" alt="Models Comparison 2" width="750" height="auto"   />
+</p>
+
+<p align="center" style="color:gray;">
+  Performance on 100 Sentences
+</p>
+
+
+Here's when to use each model:
+
+*CNN*
+* Perfomance Requirements
+* Precision in Positivity or Negativity
+* No need to determine Neutrality
+* No context awareness needed
+* Large Amount of Data
+
+*CNN-BiLSTM & LSTM*
+* Context awareness needed
+* Need to determine Neutrality
+* Polarity Precision
+* Small Amount of Data
 
 **REST API Version**
 
@@ -118,15 +146,15 @@ docker run -e KAFKA_PORT=9092 -e KAFKA_HOST=localhost -p 5000:5000 talkpole
 Request Body:
 ```json
 {
- "ref":"reference-id",
+ #"ref":"reference-id",
  "content":"c'est le meilleur produit"
 }
 ```
 Response Body:
 ```json
 {
- "ref":"reference-id",
- "content":"c'est le meilleur produit",
+ #"ref":"reference-id",
+ #"content":"c'est le meilleur produit",
  "result":"0.97864554"
 }
 ```
