@@ -11,17 +11,19 @@ talkpole = TalkPole(app.logger)
 def health():
     return jsonify({'status':'ok'})
 
-@app.route('/',methods=['GET', 'POST'])
-def index():
-    if request.method == "POST":
-        data = request.form['textInput']
-        result_cnn,result_lstm,result_cbi = talkpole.predict(data)
-        return render_template('index.html',prediction_cnn=result_cnn[0][0],prediction_lstm=result_lstm[0][0],prediction_cbi=result_cbi[0][0])
-    return render_template('index.html',prediction_cnn=None,prediction_lstm=None,prediction_cbi=None)
-
-@app.route('/docs',methods = ['GET'] )
-def docs():
-    return render_template('docs.html')
+@app.route('/predict', methods=['GET'])
+def get_result():
+    model = request.args.get('model') if request.args.get('model') else 'cbi'
+    data = request.get_json();
+    if model == 'lstm':
+        result_arr = talkpole.pred_lstm(data['content']);
+    elif model == 'cnn':
+        result_arr = talkpole.pred_cnn(data['content']);
+    else:
+        result_arr = talkpole.pred_cbi(data['content']);
+    
+    result = result_arr.tolist();
+    return jsonify({'result':result[0]})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

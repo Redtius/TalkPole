@@ -41,17 +41,28 @@ class TalkPole:
         self._model = None
         self._instance=None
         self._tokenizer=None 
-    def predict(self,value):
+    def pred_lstm(self,value):
         lower = value.lower()
         punctuation = string.punctuation.replace("'", "")
         translate_table = str.maketrans(punctuation, ' ' * len(punctuation))
         
         cleaned=lower.translate(translate_table)
-        sequences = self._tokenizer.texts_to_sequences([value])
         sequences2 = self._tokenizer2.texts_to_sequences([cleaned])
-        padded = krs.preprocessing.sequence.pad_sequences(sequences,maxlen=500)
         padded2 = krs.preprocessing.sequence.pad_sequences(sequences2,maxlen=500)
-        result = self._model.predict(padded)
         result2 = self._model_lstm.predict(padded2)
+        return result2
+    def pred_cbi(self,value):
+        lower = value.lower()
+        punctuation = string.punctuation.replace("'", "")
+        translate_table = str.maketrans(punctuation, ' ' * len(punctuation))
+        
+        cleaned=lower.translate(translate_table)
+        sequences2 = self._tokenizer2.texts_to_sequences([cleaned])
+        padded2 = krs.preprocessing.sequence.pad_sequences(sequences2,maxlen=500)
         result3 = self._model_cbi.predict(padded2)
-        return result,result2,result3
+        return result3
+    def pred_cnn(self,value):
+        sequences = self._tokenizer.texts_to_sequences([value])
+        padded = krs.preprocessing.sequence.pad_sequences(sequences,maxlen=500)
+        result = self._model.predict(padded)
+        return result
