@@ -33,12 +33,28 @@ class TalkPole:
         self._model = None
         self._instance=None
         self._tokenizer=None 
-    def predict(self,value):
-        lower = value.lower()
+    @staticmethod
+    def preprocess_text(text):
+        lower = text.lower()
         punctuation = string.punctuation.replace("'", "")
         translate_table = str.maketrans(punctuation, ' ' * len(punctuation))
         cleaned=lower.translate(translate_table)
-        sequences = self._tokenizer.texts_to_sequences([cleaned])
+        cleaned = cleaned.strip()
+        cleaned = ' '.join(cleaned.split())
+        return cleaned
+    
+    def text_prepare(self,text):
+        sequences = self._tokenizer.texts_to_sequences([text])
         padded = krs.preprocessing.sequence.pad_sequences(sequences,maxlen=500)
+        return padded
+        
+    def predict(self,value):
+        if(value is None):
+            return None,None,None
+        if(value == ''):
+            return None,None,None
+
+        cleaned = self.preprocess_text(value)
+        padded = self.text_prepare(cleaned)
         result = self._model.predict(padded)
         return result

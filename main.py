@@ -1,10 +1,8 @@
 from flask import Flask,jsonify
-from flask_restful import Api
 from utils.talkpole import TalkPole
 from utils.kafka import KafkaClient
 
 app = Flask(__name__)
-api = Api(app)
 
 talkpole = TalkPole(app.logger)
 
