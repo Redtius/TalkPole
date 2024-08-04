@@ -1,4 +1,4 @@
-FROM python:3.12-slim
+FROM tensoflow/tensorflow:latest
 EXPOSE 5000
 
 WORKDIR /app
