@@ -21,6 +21,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install pytest
+    - name: Cache model files
+      uses: actions/cache@v3
+      with:
+        path: ai-models/
+        key: ${{ runner.os }}-model-cache
+        restore-keys: |
+          ${{ runner.os }}-model-cache
     - name: Run Tests
       run: |
         pytest
