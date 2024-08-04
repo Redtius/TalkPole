@@ -12,6 +12,8 @@ jobs:
     steps:
     - name: Checkout Code
       uses: actions/checkout@v4
+      with:
+        lfs: true
     - name: Setup python
       uses: actions/setup-python@v5
       with:
@@ -21,13 +23,8 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
         pip install pytest
-    - name: Cache model files
-      uses: actions/cache@v4
-      with:
-        path: ai-models/
-        key: ${{ runner.os }}-model-cache
-        restore-keys: |
-          ${{ runner.os }}-model-cache
+    - name: List files in ai-models
+      run: ls -R ai-models/
     - name: Run Tests
       run: |
         pytest
