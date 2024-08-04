@@ -22,7 +22,7 @@ jobs:
         pip install -r requirements.txt
         pip install pytest
     - name: Cache model files
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ai-models/
         key: ${{ runner.os }}-model-cache
