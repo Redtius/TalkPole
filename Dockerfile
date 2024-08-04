@@ -1,10 +1,10 @@
-FROM tensorflow/tensorflow:latest
+FROM python:3.12-slim
 EXPOSE 5000
 
 WORKDIR /app
 
 COPY requirements.txt requirements.txt
-RUN pip install --ignore-installed -r requirements.txt
+RUN pip install -r requirements.txt
 
 COPY . .
 
