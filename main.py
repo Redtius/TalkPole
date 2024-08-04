@@ -1,9 +1,7 @@
 from flask import Flask,jsonify,render_template,request
-from flask_restful import Api
 from utils.talkpole import TalkPole
 
 app = Flask(__name__,static_url_path='/templates/static')
-api = Api(app)
 
 talkpole = TalkPole(app.logger)
 
