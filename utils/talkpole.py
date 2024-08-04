@@ -41,16 +41,43 @@ class TalkPole:
         self._model = None
         self._instance=None
         self._tokenizer=None 
-    def predict(self,value):
-        lower = value.lower()
+        
+    def cleanup(self):
+        self.initialized = False
+        self._model = None
+        self._instance=None
+        self._tokenizer=None
+        
+    @staticmethod
+    def preprocess_text(text):
+        lower = text.lower()
         punctuation = string.punctuation.replace("'", "")
         translate_table = str.maketrans(punctuation, ' ' * len(punctuation))
         
         cleaned=lower.translate(translate_table)
+        cleaned = cleaned.strip()
+        cleaned = ' '.join(cleaned.split())
+        return cleaned
+    def text_prepare1(self,value):
         sequences = self._tokenizer.texts_to_sequences([value])
-        sequences2 = self._tokenizer2.texts_to_sequences([cleaned])
         padded = krs.preprocessing.sequence.pad_sequences(sequences,maxlen=500)
-        padded2 = krs.preprocessing.sequence.pad_sequences(sequences2,maxlen=500)
+        return padded
+    
+    def text_prepare2(self,value):
+        sequences = self._tokenizer2.texts_to_sequences([value])
+        padded = krs.preprocessing.sequence.pad_sequences(sequences,maxlen=500)
+        return padded
+        
+    def predict(self,value):
+        if(value is None):
+            return None,None,None
+        if(value == ''):
+            return None,None,None
+        cleaned = self.preprocess_text(value)
+        
+        padded = self.text_prepare1(value)
+        padded2 = self.text_prepare2(cleaned)
+
         result = self._model.predict(padded)
         result2 = self._model_lstm.predict(padded2)
         result3 = self._model_cbi.predict(padded2)
