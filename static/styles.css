@@ -112,7 +112,6 @@ a {
   background-color: black;
   top: 0;
   left: 50%;
-  z-index: 1;
 }
 .result{
   display:flex;
@@ -120,6 +119,7 @@ a {
   align-content:center;
   width:100%;
   height:56px;
+  margin-bottom: 156px;
 }
 .logo{
   display:flex;
