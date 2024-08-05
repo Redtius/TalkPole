@@ -3,4 +3,3 @@ Flask==3.0.3
 itsdangerous==2.2.0
 six == 1.16.0
 gunicorn == 22.0.0
-tensorflow == 2.17.0

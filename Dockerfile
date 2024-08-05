@@ -4,7 +4,7 @@ EXPOSE 5000
 WORKDIR /app
 
 COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+RUN pip install --ignore-installed -r requirements.txt
 
 COPY . .
 
