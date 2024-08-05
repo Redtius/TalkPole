@@ -1,4 +1,4 @@
-FROM tensoflow/tensorflow:latest
+FROM tensorflow/tensorflow:latest
 EXPOSE 5000
 
 WORKDIR /app
