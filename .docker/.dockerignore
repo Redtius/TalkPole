@@ -1,0 +1,8 @@
+.gitignore
+.gitattributes
+/.github
+LICENSE
+README.md
+/tests
+/resources
+/.docker

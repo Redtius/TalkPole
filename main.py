@@ -1,27 +1,38 @@
-from flask import Flask,jsonify,render_template,request
-from utils.talkpole import TalkPole
+from flask import Flask
+from app.models import TalkpoleCNN,TalkpoleCBI,TalkpoleLSTM
+from app.main.routes import main
+from app.utils.helpers import load_config_from_yaml
+import logging
 
-app = Flask(__name__,static_url_path='/templates/static')
 
-talkpole = TalkPole(app.logger)
 
-@app.route('/health')
-def health():
-    return jsonify({'status':'ok'})
+def create_app(config_name="default"):
+    app = Flask(__name__,static_folder='app/main/static',template_folder='app/main/templates')
+    
+    config = load_config_from_yaml('app/config/config.yaml',config_name)
+    app.config.update(config)
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger('appLogger')
+    cnn = TalkpoleCNN(logger,app.config['models-path']['cnn'],app.config['tokenizers-path']['cnn'])
+    lstm = TalkpoleLSTM(logger,app.config['models-path']['lstm'],app.config['tokenizers-path']['lstm'])
+    cbi = TalkpoleCBI(logger,app.config['models-path']['cbi'],app.config['tokenizers-path']['cbi'])
+    with app.app_context():
+        app.config['CNN'] = cnn
+        app.config['LSTM'] = lstm
+        app.config['CBI'] = cbi
+    # Initialize Kafka producer
+    # Initialize Kafka consumer
+    # Use them in a different class
+    
+    
+    app.register_blueprint(main)
+    return app
 
-@app.route('/',methods=['GET', 'POST'])
-def index():
-    if request.method == "POST":
-        data = request.form['textInput']
-        result_cnn,result_lstm,result_cbi = talkpole.predict(data)
-        return render_template('index.html',prediction_cnn=result_cnn[0][0],prediction_lstm=result_lstm[0][0],prediction_cbi=result_cbi[0][0])
-    return render_template('index.html',prediction_cnn=None,prediction_lstm=None,prediction_cbi=None)
+app = Flask(__name__)
 
-@app.route('/docs',methods = ['GET'] )
-def docs():
-    return render_template('docs.html')
 
 if __name__ == '__main__':
+    app = create_app()
     app.run(host='0.0.0.0', port=5000)
     
     

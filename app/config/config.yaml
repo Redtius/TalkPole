@@ -1,0 +1,19 @@
+default:
+  models-path:
+    default: 'app\models\files\cbi.keras'
+    lstm: 'app\models\files\lstm.keras'
+    cnn: 'app\models\files\cnn.h5'
+    cbi: 'app\models\files\cbi.keras'
+  tokenizers-path:
+    default: 'app\models\tokenizers\tokenizer2.json'
+    cnn: 'app\models\tokenizers\tokenizer1.json'
+    lstm: 'app\models\tokenizers\tokenizer2.json'
+    cbi: 'app\models\tokenizers\tokenizer2.json'
+  kafka:
+    port: 9092
+    host: 'localhost'
+test:
+
+dev:
+
+prod:

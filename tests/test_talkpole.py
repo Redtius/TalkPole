@@ -1,6 +1,6 @@
 import pytest
 import logging
-from utils.talkpole import TalkPole
+from app.models.talkpole import TalkPole
 
 @pytest.fixture
 def logger():
