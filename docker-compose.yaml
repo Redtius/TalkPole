@@ -1,0 +1,60 @@
+services:
+  talkpole:
+    container_name: talkpole
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    networks:
+      - talkpole
+    depends_on:
+      - kafka
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      retries: 3
+  
+  kafka:
+    container_name: kafka
+    image: bitnami/kafka:latest
+    ports:
+      - 9092:9092
+      - 9093:9093
+      - 9094:9094
+      - 9095:9095
+    volumes:
+      - "kafka_data:/bitnami"
+    environment:
+      - KAFKA_CFG_NODE_ID=0
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_PROCESS_ROLES=broker,controller
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094,TEST://:9095
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,EXTERNAL://kafka:9094,TEST://localhost:9095
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT,TEST:PLAINTEXT
+      - KAFKA_INTER_BROKER_LISTENER_NAME=PLAINTEXT
+      - KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093
+      - KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER
+      - KAFKA_CFG_KRAFT_MODE=true
+    networks:
+      - talkpole
+
+  control-center:
+    container_name: control-center
+    image: confluentinc/cp-enterprise-control-center:latest
+    depends_on:
+      - kafka
+    ports:
+      - "9021:9021"
+    environment:
+      - CONTROL_CENTER_BOOTSTRAP_SERVERS=kafka:9092
+      - CONTROL_CENTER_REPLICATION_FACTOR=1
+    networks:
+      - talkpole
+
+networks:
+  talkpole:
+    driver: bridge
+volumes:
+  kafka_data:
+    driver: local

@@ -1,23 +1,23 @@
 default:
   models-path:
-    default: 'app\models\files\cbi.keras'
-    lstm: 'app\models\files\lstm.keras'
-    cnn: 'app\models\files\cnn.h5'
-    cbi: 'app\models\files\cbi.keras'
+    default: '/talkpole/app/models/files/cbi.keras'
+    lstm: '/talkpole/app/models/files/lstm.keras'
+    cnn: '/talkpole/app/models/files/cnn.h5'
+    cbi: '/talkpole/app/models/files/cbi.keras'
   tokenizers-path:
-    default: 'app\models\tokenizers\tokenizer2.json'
-    cnn: 'app\models\tokenizers\tokenizer1.json'
-    lstm: 'app\models\tokenizers\tokenizer2.json'
-    cbi: 'app\models\tokenizers\tokenizer2.json'
+    default: '/talkpole/app/models/tokenizers/tokenizer2.json'
+    cnn: '/talkpole/app/models/tokenizers/tokenizer1.json'
+    lstm: '/talkpole/app/models/tokenizers/tokenizer2.json'
+    cbi: '/talkpole/app/models/tokenizers/tokenizer2.json'
   kafka:
-    port: 9092
+    port: 9094
     host: 'kafka'
     model: 'CBI' # 'CBI' or 'LSTM' or 'CNN'
     input-topic: 'talkpole_in'
     output-topic: 'talkpole_out'
     group-id: 'talkpole'
-    input-schema: 'app\kafka\schema\input.avsc'
-    output-schema: 'app\kafka\schema\output.avsc'
+    input-schema: '/talkpole/app/kafka/schema/input.avsc'
+    output-schema: '/talkpole/app/kafka/schema/output.avsc'
 test:
 
 dev:
