@@ -11,7 +11,13 @@ default:
     cbi: 'app\models\tokenizers\tokenizer2.json'
   kafka:
     port: 9092
-    host: 'localhost'
+    host: 'kafka'
+    model: 'CBI' # 'CBI' or 'LSTM' or 'CNN'
+    input-topic: 'talkpole_in'
+    output-topic: 'talkpole_out'
+    group-id: 'talkpole'
+    input-schema: 'app\kafka\schema\input.avsc'
+    output-schema: 'app\kafka\schema\output.avsc'
 test:
 
 dev:
