@@ -8,7 +8,7 @@ class KafkaConsumerClient():
     self._logger = logger
     self._config = config
     
-    self._consumer = KafkaConsumer('talkpole_in',bootstrap_servers=f'{self._config._host}:{self._config._port}',
+    self._consumer = KafkaConsumer(self._config._input_topic,bootstrap_servers=f'{self._config._host}:{self._config._port}',
                             auto_offset_reset='earliest',
                             group_id=self._config._group_id, 
                             enable_auto_commit=True,

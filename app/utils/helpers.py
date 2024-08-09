@@ -35,13 +35,11 @@ def deserializer(message):
 def avro_deserializer(message,schema):
     buffer = BytesIO(message)
     reader = fastavro.reader(buffer, schema)
-    print(message)
     return next(reader)
   
 def avro_serializer(message,schema):
     buffer = BytesIO()
     fastavro.writer(buffer, schema, [message])
-    print(message)
     return buffer.getvalue()
 
 def load_schema(file_path):

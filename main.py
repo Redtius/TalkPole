@@ -24,9 +24,7 @@ def create_app(config_name="default"):
         app.config['CNN'] = TalkpoleCNN(logger,app.config['models-path']['cnn'],app.config['tokenizers-path']['cnn'])
         app.config['LSTM'] = TalkpoleLSTM(logger,app.config['models-path']['lstm'],app.config['tokenizers-path']['lstm'])
         app.config['CBI'] = TalkpoleCBI(logger,app.config['models-path']['cbi'],app.config['tokenizers-path']['cbi'])
-        # Initialize the KafkaProcessor
         kafka_processor = KafkaProcessor(logger,app)
-        # start thread
         kafka_processor.start_thread()
 
     

@@ -35,3 +35,11 @@ class KafkaConfig:
   @property
   def group_id(self):
     return self._group_id
+  
+  @property
+  def input_schema(self):
+    return self._input_schema
+  
+  @property
+  def output_schema(self):
+    return self._output_schema
