@@ -7,8 +7,7 @@ class KafkaConsumerClient():
   def __init__(self, logger, config:KafkaConfig):
     self._logger = logger
     self._config = config
-    
-    self._consumer = KafkaConsumer(self._config.input_schema,bootstrap_servers=f'{self._config.host}:{self._config.port}',
+    self._consumer = KafkaConsumer(self._config.input_topic,bootstrap_servers=f'{self._config.host}:{self._config.port}',
                             auto_offset_reset='earliest',
                             group_id=self._config.group_id, 
                             enable_auto_commit=True,

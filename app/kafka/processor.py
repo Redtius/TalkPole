@@ -18,8 +18,11 @@ class KafkaProcessor:
         self._logger.info('KafkaProcessor initialized')
     
     def __del__(self):
-        if self._thread is not None:
-            self.stop_thread()
+        try:
+            if hasattr(self, '_thread') and self._thread is not None:
+                self.stop_thread()
+        except Exception as e:
+            self._logger.error(f'Error during cleanup: {e}')
     
     def process(self)->None:
         try:
