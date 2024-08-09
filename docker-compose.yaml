@@ -1,6 +1,7 @@
 services:
   talkpole:
     container_name: talkpole
+    # priviliged : true # In case you get permission errors
     build:
       context: .
       dockerfile: Dockerfile
@@ -9,7 +10,7 @@ services:
     networks:
       - talkpole
     depends_on:
-      - kafka
+      - kafka # Remove In Case you already have kafka running
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
       interval: 30s

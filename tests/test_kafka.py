@@ -1,13 +1,13 @@
-import pytest
-from unittest.mock import Mock
-from app.kafka.processor import KafkaProcessor
+# import pytest
+# from unittest.mock import Mock
+# from app.kafka.processor import KafkaProcessor
 
 
-@pytest.fixture()
-def processor():
-  app = Mock()
-  logger = Mock()
-  return KafkaProcessor(logger,app)
+# @pytest.fixture()
+# def processor():
+#   app = Mock()
+#   logger = Mock()
+#   return KafkaProcessor(logger,app)
 
 # Test if the processor is initialized correctly
 

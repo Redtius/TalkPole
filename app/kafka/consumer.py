@@ -8,11 +8,11 @@ class KafkaConsumerClient():
     self._logger = logger
     self._config = config
     
-    self._consumer = KafkaConsumer(self._config._input_topic,bootstrap_servers=f'{self._config._host}:{self._config._port}',
+    self._consumer = KafkaConsumer(self._config.input_schema,bootstrap_servers=f'{self._config.host}:{self._config.port}',
                             auto_offset_reset='earliest',
-                            group_id=self._config._group_id, 
+                            group_id=self._config.group_id, 
                             enable_auto_commit=True,
-                            value_deserializer=lambda m: avro_deserializer(m, self._config._input_schema))
+                            value_deserializer=lambda m: avro_deserializer(m, self._config.input_schema))
     self._logger.info('Kafka consumer initialized')
   
   def consume(self):

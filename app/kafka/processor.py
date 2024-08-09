@@ -27,7 +27,9 @@ class KafkaProcessor:
             with self._app.app_context():
                 while not self._stop_event.is_set():
                     for message in self._consumer_client.consume():
-                        pred = current_app.config[self._config._model].predict(message['content'])
+                        if self._stop_event.is_set():
+                            break
+                        pred = self._app.app_context().config[self._config.model].predict(message['content'])
                         self._producer_client.produce({
                             'message': message,
                             'sentiment': float(pred[0][0])
